@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nexus Infinity Corporation | ERP+IA Ladrillera</title>
+<style>
+:root{--navy:#14213d;--clay:#b4472b;--fire:#f2a01f;--bg:#eef0f3;--card:#fff;--ink:#1d2433;--mut:#5d6678;--line:#d9dde5;--ok:#1e7f56;--bad:#b3261e;--warn:#8a5a00}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.5 "Segoe UI",system-ui,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+h1,h2,h3{font-family:Bahnschrift,"Roboto Condensed","Segoe UI",sans-serif;margin:0;line-height:1.2}
+h1{font-size:23px}h2{font-size:17px;margin-bottom:10px}h3{font-size:15px}
+button,input,select{font:inherit}
+:focus-visible{outline:3px solid var(--fire);outline-offset:2px}
+aside{position:fixed;inset:0 auto 0 0;width:262px;background:var(--navy);color:#fff;overflow-y:auto;z-index:20}
+.brand{display:flex;gap:10px;align-items:center;padding:16px;border-bottom:3px solid var(--clay);position:sticky;top:0;background:var(--navy)}
+.brand b{display:block;font-size:15px;line-height:1.2}.brand small{color:#c3cbe0}
+nav .g{padding:14px 16px 4px;color:var(--fire);font-weight:600;font-size:13px}
+nav button{display:flex;gap:8px;width:100%;text-align:left;background:none;border:0;color:#dde2f0;padding:6px 16px;cursor:pointer;border-left:4px solid transparent}
+nav button i{font-style:normal;width:20px;color:#8f9bbd;text-align:right;flex:none}
+nav button:hover{background:#1f3159}
+nav button.on{background:#263b69;border-left-color:var(--fire);color:#fff;font-weight:600}
+nav button.core::after{content:"";width:7px;height:7px;background:var(--clay);margin-left:auto;align-self:center;flex:none}
+main{margin-left:262px;min-height:100vh}
+header{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:#fff;border-bottom:1px solid var(--line);padding:12px 22px}
+header .sub{color:var(--mut)}
+#menu{display:none}
+#view{padding:20px 22px;max-width:1400px}
+.grid{display:grid;gap:14px;margin-bottom:14px}
+.k{grid-template-columns:repeat(auto-fit,minmax(165px,1fr))}
+.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px;min-width:0}
+.view>.card{margin-bottom:14px}
+.kpi{border-top:4px solid var(--navy)}.kpi b{display:block;font:600 26px Bahnschrift,"Segoe UI",sans-serif}.kpi span{color:var(--mut)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{background:#f4f6f9;font-weight:600}
+td.n,th.n{text-align:right}
+.btn{background:var(--clay);color:#fff;border:0;border-radius:4px;padding:7px 14px;cursor:pointer;font-weight:600}
+.btn.alt{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.btn.sm{padding:3px 10px;font-size:13px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tag{display:inline-block;padding:1px 8px;border-radius:3px;font-size:12px;font-weight:600;background:#e5e9f2;color:var(--navy)}
+.tag.ok{background:#dcf1e7;color:var(--ok)}.tag.bad{background:#fbe2e0;color:var(--bad)}.tag.warn{background:#fff0cc;color:var(--warn)}
+.line{display:flex;overflow-x:auto;gap:3px;padding-bottom:4px}
+.st{flex:1;min-width:145px;background:var(--clay);color:#fff;padding:12px;border-radius:3px}
+.st:nth-child(1){background:#6d5449}.st:nth-child(2){background:#855244}.st:nth-child(3){background:#9c4c37}.st:nth-child(5){background:#99381f}.st:nth-child(6){background:var(--navy)}
+.st b{display:block;font-size:21px;font-family:Bahnschrift,"Segoe UI",sans-serif}
+.st em{display:block;font-style:normal;font-size:12px;background:rgba(0,0,0,.25);padding:3px 6px;margin-top:6px;border-radius:2px}
+.hb{display:grid;grid-template-columns:minmax(90px,170px) 1fr 80px;gap:8px;align-items:center;margin:7px 0}
+.hb div{background:#e8ebf1;height:14px}.hb div i{display:block;height:100%;background:var(--clay)}.hb span:last-child{text-align:right}
+svg.ch{width:100%;height:auto;display:block}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+label{display:block;font-weight:600;font-size:13px}
+label input,label select{display:block;width:100%;margin-top:4px;padding:7px;border:1px solid #b9c0cd;border-radius:4px;background:#fff;font-weight:400}
+dialog{border:0;border-radius:8px;padding:20px;width:min(620px,94vw);border-top:5px solid var(--clay)}
+dialog::backdrop{background:rgba(20,33,61,.6)}
+.err{color:var(--bad);font-weight:600;min-height:20px}
+#toast{position:fixed;right:16px;bottom:16px;background:var(--navy);color:#fff;padding:11px 18px;border-radius:5px;border-left:5px solid var(--fire);display:none;z-index:50;max-width:90vw}
+.cars{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:6px}
+.car{padding:10px 6px;text-align:center;border-radius:3px;color:#fff}
+.tl{border-left:3px solid var(--clay);margin-left:6px;padding-left:16px}.tl>div{margin-bottom:14px}
+.chat{height:260px;overflow-y:auto;border:1px solid var(--line);padding:10px;border-radius:4px;margin-bottom:8px;background:#fafbfc}
+.msg{padding:8px 11px;border-radius:6px;margin:6px 0;max-width:85%;background:#e8ecf5}.msg.me{margin-left:auto;background:var(--navy);color:#fff}
+.note{color:var(--mut);font-size:13px;margin:8px 0 0}
+footer{padding:16px 22px;color:var(--mut);font-size:13px}
+@media(max-width:860px){aside{display:none}aside.open{display:block}main{margin:0}#menu{display:inline-block}#view,header{padding-left:16px;padding-right:16px}}
+</style>
+</head>
+<body>
+<aside id="side">
+  <div class="brand">
+    <svg width="44" height="30" viewBox="0 0 44 30" aria-hidden="true"><path d="M12 7c-11 0-11 16 0 16 8 0 12-16 20-16 11 0 11 16 0 16-8 0-12-16-20-16z" fill="none" stroke="#f2a01f" stroke-width="4"/></svg>
+    <div><b>Nexus Infinity Corporation</b><small>ERP+IA para ladrilleras</small></div>
+  </div>
+  <nav id="nav"></nav>
+</aside>
+<main>
+  <header>
+    <div><button class="btn alt sm" id="menu">Menú</button> <h1 id="title" style="display:inline"></h1><div class="sub" id="subtitle"></div></div>
+    <div><span class="tag warn">Mockup con datos de demostración</span> <button class="btn" data-a="newOP">Nueva orden de producción</button></div>
+  </header>
+  <div id="view" class="view"></div>
+  <footer>© 2026 Nexus Infinity Corporation. Prototipo visual: los cambios se pierden al recargar la página. Las lecturas de sensores y las respuestas de IA son simuladas.</footer>
+</main>
+<dialog id="dlg"></dialog>
+<div id="toast" role="status"></div>
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=v=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num=(v,d=0)=>Number(v).toLocaleString('es-BO',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct=(a,b)=>b?a/b*100:0;
+const sum=(a,f)=>a.reduce((s,x)=>s+f(x),0);
+const today='2026-11-26';
+
+/* ---------- datos de demostración ---------- */
+const P={
+ L6H:{name:'Ladrillo 6 huecos',dim:'24 × 15 × 10 cm',kg:2.4,price:1.15,pallet:400},
+ L4H:{name:'Ladrillo 4 huecos',dim:'24 × 12 × 8 cm',kg:1.6,price:0.85,pallet:550},
+ GAM:{name:'Gambote 18 huecos',dim:'24 × 11 × 6 cm',kg:2.0,price:1.30,pallet:500},
+ LOS:{name:'Complemento para losa',dim:'40 × 25 × 12 cm',kg:6.5,price:4.20,pallet:150}
+};
+const REC={'Arcilla roja':60,'Arcilla plástica':25,'Arena (desgrasante)':12,'Aserrín':3};
+const cfg={factor:1.12,agua:20,gasM3kg:0.058,pGas:0.45,kwhMil:38,pKwh:0.65,moMil:95,mantMil:28,indMil:40};
+const RAW=[
+ {m:'Arcilla roja',kg:5200000,min:900000,p:0.07},
+ {m:'Arcilla plástica',kg:2100000,min:400000,p:0.09},
+ {m:'Arena (desgrasante)',kg:820000,min:200000,p:0.06},
+ {m:'Aserrín',kg:58000,min:60000,p:0.25}
+];
+const STAGES=['Programada','Preparación','Extrusión','Secado','Cocción','Clasificación','Terminada'];
+const ACT=['Preparar mezcla','Registrar extrusión','Registrar secado','Registrar cocción','Clasificar y paletizar'];
+const finished={L6H:{a:182000,b:12400},L4H:{a:96000,b:5100},GAM:{a:41000,b:2300},LOS:{a:8600,b:410}};
+const lots=[];
+function mk(id,prod,plan,stage,date,turno,d){lots.push(Object.assign({id,prod,plan,stage,date,turno,kiln:'Horno túnel 1',dryer:'Cámara 2',acopio:'AC-07'},d))}
+const full=(e,re,ds,cs,b,dc,gas)=>({mix:Math.round(e*3),ext:e,extR:re,dryR:ds,cookR:cs,b,disc:dc,a:e-re-ds-cs-b-dc,gas});
+mk('OP-2611-001','L6H',60000,6,'2026-11-16','Día',full(61200,1530,1490,640,2900,610,7900));
+mk('OP-2611-002','L4H',45000,6,'2026-11-17','Noche',full(46000,920,870,410,1800,380,4250));
+mk('OP-2611-003','GAM',30000,6,'2026-11-18','Día',full(30900,800,1020,350,1700,420,3400));
+mk('OP-2611-004','L6H',60000,6,'2026-11-19','Día',full(61500,1290,2460,720,3300,760,8350));
+mk('OP-2611-005','L6H',50000,5,'2026-11-21','Día',{mix:153000,ext:51000,extR:1100,dryR:1320,cookR:530,gas:6700});
+mk('OP-2611-006','LOS',9000,4,'2026-11-23','Día',{mix:75000,ext:9300,extR:190,dryR:260});
+mk('OP-2611-007','L4H',40000,3,'2026-11-24','Noche',{mix:82000,ext:41000,extR:870});
+mk('OP-2611-008','L6H',60000,2,'2026-11-25','Día',{mix:183000});
+mk('OP-2611-009','GAM',25000,0,today,'Día',{});
+const stops=[['2026-11-23','Extrusora','Atasco por piedras',55],['2026-11-23','Cortadora','Cambio de alambre',20],['2026-11-24','Extrusora','Cambio de molde',75],['2026-11-24','Laminador','Falla mecánica',40],['2026-11-25','Extrusora','Pérdida de vacío',35],['2026-11-25','Cortadora','Cambio de alambre',15]];
+const causes={Extrusión:['Corte defectuoso','Deformación en verde','Pérdida de vacío'],Secado:['Fisura por secado rápido','Deformación','Rotura en manipuleo'],Cocción:['Fisura térmica','Cocción insuficiente','Sobrecocción'],Clasificación:['Rotura en descarga','Medida fuera de tolerancia','Color no uniforme']};
+const log=lots.filter(l=>l.stage>1).map(l=>({lot:l.id,t:l.date,e:'Registro inicial de demostración'}));
+const lossLog=[];
+lots.forEach((l,i)=>[['Extrusión','extR'],['Secado','dryR'],['Cocción','cookR'],['Clasificación','disc']].forEach(([e,k])=>{if(l[k]!=null)lossLog.push({lot:l.id,etapa:e,causa:causes[e][i%3],u:l[k]})}));
+
+/* ---------- cálculos ---------- */
+const solid=(prod,u)=>u*P[prod].kg*cfg.factor;
+lots.forEach(l=>{if(l.mix)l.mix=Math.ceil(solid(l.prod,(l.ext||l.plan*1.02))*(1+cfg.agua/100)*1.01/100)*100});
+function bal(){const r=[];const add=(n,f,inp,loss)=>{const s=lots.filter(f);r.push({n,in:sum(s,inp),loss:sum(s,loss)})};
+ add('Extrusión',l=>l.stage>2,l=>l.ext,l=>l.extR);
+ add('Secado',l=>l.stage>3,l=>l.ext-l.extR,l=>l.dryR);
+ add('Cocción',l=>l.stage>4,l=>l.ext-l.extR-l.dryR,l=>l.cookR);
+ add('Clasificación',l=>l.stage>5,l=>l.ext-l.extR-l.dryR-l.cookR,l=>l.disc);return r}
+const available=l=>(l.ext||0)-(l.extR||0)-(l.dryR||0)-(l.cookR||0);
+const done=()=>lots.filter(l=>l.stage===6);
+function cost(l){const mat=sum(RAW,r=>solid(l.prod,l.ext)*REC[r.m]/100*r.p),gas=l.gas*cfg.pGas,k=l.ext/1000;
+ const c={Materiales:mat,Gas:gas,Electricidad:k*cfg.kwhMil*cfg.pKwh,'Mano de obra':k*cfg.moMil,Mantenimiento:k*cfg.mantMil,Indirectos:k*cfg.indMil};
+ const total=Object.values(c).reduce((a,b)=>a+b,0),vend=l.a+l.b;
+ const std=(sum(RAW,r=>solid(l.prod,1000)*REC[r.m]/100*r.p)+P[l.prod].kg*1000*cfg.gasM3kg*cfg.pGas+cfg.kwhMil*cfg.pKwh+cfg.moMil+cfg.mantMil+cfg.indMil)/0.95;
+ return {c,total,mil:total/vend*1000,std}}
+
+/* ---------- componentes ---------- */
+const card=(t,h,btn='')=>`<div class="card"><div class="bar"><h2 style="margin:0">${t}</h2>${btn}</div>${h}</div>`;
+const kpis=a=>`<div class="grid k">${a.map(([v,l])=>`<div class="card kpi"><b>${v}</b><span>${l}</span></div>`).join('')}</div>`;
+const table=(h,rows)=>`<div class="scroll"><table><thead><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${h.length}">Sin registros. Usa el botón de registro para agregar el primero.</td></tr>`}</tbody></table></div>`;
+const tag=(t,c='')=>`<span class="tag ${c}">${t}</span>`;
+const hbars=(a,u='')=>{const m=Math.max(...a.map(x=>x[1]),1);return a.map(([l,v,d=0])=>`<div class="hb"><span>${esc(l)}</span><div><i style="width:${v/m*100}%"></i></div><span>${num(v,d)}${u}</span></div>`).join('')};
+function lineChart(vals,labels,color,unit){const W=600,H=220,m=Math.max(...vals)*1.15,x=i=>45+i*(W-65)/(vals.length-1),y=v=>H-28-v/m*(H-48);
+ let g='';for(let i=0;i<=4;i++){const v=m*i/4;g+=`<line x1="45" x2="${W-20}" y1="${y(v)}" y2="${y(v)}" stroke="#e1e5ec"/><text x="40" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#5d6678">${Math.round(v)}</text>`}
+ return `<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico en ${unit}">${g}<polyline fill="none" stroke="${color}" stroke-width="3" points="${vals.map((v,i)=>x(i)+','+y(v)).join(' ')}"/>${vals.map((v,i)=>`<circle cx="${x(i)}" cy="${y(v)}" r="3.5" fill="${color}"><title>${labels[i]}: ${v} ${unit}</title></circle><text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="11" fill="#5d6678">${labels[i]}</text>`).join('')}</svg>`}
+function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',3200)}
+function form(title,fields,onSave,note=''){const d=$('#dlg');
+ d.innerHTML=`<h2>${title}</h2><form id="f" novalidate><div class="form">${fields.map(f=>`<label>${f.l}${f.o?`<select name="${f.k}">${f.o.map(o=>{const[v,t]=Array.isArray(o)?o:[o,o];return `<option value="${esc(v)}">${esc(t)}</option>`}).join('')}</select>`:`<input name="${f.k}" type="${f.t||'text'}" ${f.t==='number'?'min="0" step="any"':''} value="${esc(f.v??'')}">`}</label>`).join('')}</div>${note?`<p class="note">${note}</p>`:''}<p class="err" id="err" role="alert"></p><div class="bar" style="margin:0;justify-content:flex-end"><button type="button" class="btn alt" id="cancel">Cancelar</button><button class="btn">Guardar</button></div></form>`;
+ d.showModal();$('#cancel').onclick=()=>d.close();
+ $('#f').onsubmit=e=>{e.preventDefault();const v=Object.fromEntries(new FormData(e.target));
+  for(const f of fields){if(String(v[f.k]).trim()===''){$('#err').textContent=`Completa el campo "${f.l}".`;return}
+   if(f.t==='number'){v[f.k]=Number(v[f.k]);if(!(v[f.k]>=0)){$('#err').textContent=`"${f.l}" debe ser cero o un número positivo.`;return}}}
+  const er=onSave(v);if(er){$('#err').textContent=er;return}d.close();render()}}
+
+/* ---------- registros genéricos ---------- */
+const DB={
+ maquinas:{t:'Máquinas, hornos y secaderos',h:['Código','Equipo','Área','Capacidad','Estado'],r:[['EXT-01','Extrusora con vacío','Extrusión','12.000 u/h','Operativa'],['LAM-01','Laminador','Preparación','35 t/h','Operativo'],['SEC-02','Cámara de secado 2','Secado','48.000 u','Operativa'],['HT-01','Horno túnel 1','Cocción','90.000 u/día','Operativo']]},
+ turnos:{t:'Turnos',h:['Turno','Horario','Supervisor'],r:[['Día','07:00 a 19:00','Supervisor A'],['Noche','19:00 a 07:00','Supervisor B']]},
+ rutas:{t:'Rutas y estándares',h:['Etapa','Equipo','Tiempo estándar','Merma máxima'],r:[['Preparación','LAM-01','8 h','0,5 %'],['Extrusión','EXT-01','5 h por lote','2,0 %'],['Secado','SEC-02','36 h','3,0 %'],['Cocción','HT-01','30 h','1,5 %'],['Clasificación','Línea 1','4 h','1,0 %']]},
+ cantera:{t:'Ingresos de materia prima',h:['Fecha','Acopio','Material','Peso (t)','Humedad %','Maduración'],r:[['2026-11-20','AC-07','Arcilla roja','320','14','21 días'],['2026-11-22','AC-08','Arcilla plástica','180','18','6 días'],['2026-11-24','AC-09','Arena (desgrasante)','60','7','No aplica']]},
+ calidad:{t:'Ensayos de laboratorio',h:['Lote','Resistencia (MPa)','Absorción %','Dimensión','Dictamen'],r:[['OP-2611-001','8,4','14,2','Conforme','Liberado'],['OP-2611-002','7,9','15,1','Conforme','Liberado'],['OP-2611-003','11,6','12,8','Conforme','Liberado'],['OP-2611-004','6,1','17,9','Observada','En revisión']]},
+ mant:{t:'Órdenes de mantenimiento',h:['OT','Equipo','Tipo','Fecha','Estado'],r:[['OT-118','EXT-01','Preventivo','2026-11-28','Programada'],['OT-119','LAM-01','Correctivo','2026-11-24','Cerrada'],['OT-120','HT-01','Preventivo','2026-12-05','Programada']]},
+ moldes:{t:'Vida útil de moldes',h:['Molde','Producto','Horas usadas','Vida útil (h)'],r:[['M-6H-02','L6H','410','500'],['M-4H-01','L4H','190','500'],['M-GAM-01','GAM','85','450']]},
+ personal:{t:'Asistencia y productividad',h:['Cuadrilla','Turno','Presentes','Área','Millares'],r:[['C-1','Día','8','Extrusión','61'],['C-2','Día','6','Carga de horno','51'],['C-3','Noche','7','Clasificación','46']]},
+ seguridad:{t:'Seguridad y medio ambiente',h:['Fecha','Tipo','Área','Descripción','Estado'],r:[['2026-11-19','Condición insegura','Molienda','Guarda de faja suelta','Cerrada'],['2026-11-24','Medición de polvo','Preparación','Sobre el límite interno','Abierta']]},
+ compras:{t:'Órdenes de compra',h:['OC','Proveedor','Detalle','Importe (Bs)','Estado'],r:[['OC-341','Proveedor demo A','Aserrín 40 t','10.000','Aprobada'],['OC-342','Proveedor demo B','Alambre de corte','1.850','En cotización']]},
+ ventas:{t:'Pedidos de clientes',h:['Pedido','Cliente','Producto','Cantidad','Entrega','Estado'],r:[['PV-901','Constructora demo 1','L6H','80000','2026-11-30','Pendiente'],['PV-902','Ferretería demo 2','L4H','30000','2026-12-02','Pendiente'],['PV-903','Constructora demo 3','GAM','55000','2026-12-04','Pendiente']]},
+ despachos:{t:'Despachos',h:['Guía','Pedido','Placa','Unidades','Estado'],r:[['GD-551','PV-899','Camión 1','8000','Entregado'],['GD-552','PV-900','Camión 2','11000','En ruta']]},
+ cuentas:{t:'Cuentas por cobrar y pagar',h:['Documento','Tipo','Tercero','Importe (Bs)','Vence'],r:[['FV-2201','Por cobrar','Constructora demo 1','46.000','2026-12-10'],['FC-877','Por pagar','Proveedor demo A','10.000','2026-12-01']]},
+ usuarios:{t:'Usuarios y roles',h:['Usuario','Rol','Permisos','Estado'],r:[['admin','Administrador','Todos','Activo'],['jplanta','Jefe de producción','Planificación y planta','Activo'],['calidad','Laboratorio','Calidad y trazabilidad','Activo']]}
+};
+function gen(k){const d=DB[k];return card(d.t,table(d.h,d.r.map(r=>r.map(esc))),`<button class="btn sm" data-a="add" data-v="${k}">Agregar registro</button>`)}
+
+/* ---------- vistas ---------- */
+const lotRows=(ls,act=true)=>table(['Orden','Producto','Plan','Etapa actual','Fecha','Turno',''],ls.map(l=>[`<b>${l.id}</b>`,P[l.prod].name,num(l.plan),tag(STAGES[l.stage],l.stage===6?'ok':l.stage?'warn':''),l.date,l.turno,`${act&&l.stage<6?`<button class="btn sm" data-a="adv" data-v="${l.id}">${ACT[l.stage<2?0:l.stage-1]}</button> `:''}<button class="btn alt sm" data-a="trace" data-v="${l.id}">Ver lote</button>`]));
+function stageView(idx,extra){const q=lots.filter(l=>idx===1?l.stage<2:l.stage===idx);
+ return card('Lotes pendientes en esta etapa',q.length?lotRows(q):'<p>No hay lotes esperando. Avanza una orden desde la etapa anterior.</p>')+extra}
+function demanda(k){const d=sum(DB.ventas.r.filter(v=>v[5]==='Pendiente'&&v[2]===k),v=>Number(v[3])),w=sum(lots.filter(l=>l.prod===k&&l.stage<6),l=>l.stage>2?available(l):l.plan);return{d,w,f:Math.max(0,d-finished[k].a-w)}}
+function mrp(){return RAW.map(r=>{const req=sum(lots.filter(l=>l.stage<2),l=>solid(l.prod,l.plan*1.05))*REC[r.m]/100+sum(Object.keys(P),p=>solid(p,demanda(p).f*1.07))*REC[r.m]/100;const saldo=r.kg-req;return[r.m,num(r.kg/1000,1),num(req/1000,1),num(saldo/1000,1),num(r.min/1000,0),saldo<r.min?tag('Comprar','bad'):tag('Suficiente','ok')]})}
+
+const V={
+dash(){const b=bal(),d=done(),sal=sum(d,l=>l.a+l.b+l.disc),loss=sum(b,x=>x.loss),ex=b[0].in;
+ const at=i=>lots.filter(l=>l.stage===i).length;
+ return kpis([[num(ex),'Unidades extruidas'],[num(pct(sum(d,l=>l.a),sal),1)+' %','Primera calidad'],[num(pct(loss,ex),1)+' %','Merma registrada sobre extrusión'],[num(sum(lots,l=>l.gas||0))+' m³','Gas consumido'],[lots.filter(l=>l.stage<6).length,'Órdenes abiertas']])+
+ card('Línea de planta: entradas y mermas por etapa',`<div class="line"><div class="st">Preparación<b>${num(sum(lots,l=>l.mix||0)/1000)} t</b>mezcla húmeda<em>Órdenes en cola: ${at(0)+at(1)}</em></div>${b.map((x,i)=>`<div class="st">${x.n}<b>${num(x.in)}</b>unidades procesadas<em>Merma ${num(x.loss)} (${num(pct(x.loss,x.in),1)} %)<br>Lotes en espera: ${at(i+2)}</em></div>`).join('')}<div class="st">Almacén<b>${num(sum(Object.values(finished),f=>f.a+f.b))}</b>ladrillos en stock<em>1ra y 2da calidad</em></div></div>`)+
+ `<div class="grid two">${card('Mermas por etapa (%)',hbars(b.map(x=>[x.n,pct(x.loss,x.in),2]),' %'))}${card('Alertas de la IA (simuladas)',aiAlerts())}</div>`+card('Órdenes abiertas',lotRows(lots.filter(l=>l.stage<6)))},
+maestros(){return card('Productos',table(['Código','Producto','Medidas','Peso cocido (kg)','Precio (Bs/u)','Unidades por pallet'],Object.entries(P).map(([k,p])=>[k,esc(p.name),esc(p.dim),num(p.kg,1),num(p.price,2),p.pallet])),`<button class="btn sm" data-a="newProd">Agregar producto</button>`)+gen('maquinas')+gen('turnos')},
+formulas(){return card('Dosificación base (materia seca)',table(['Material','Proporción %','Costo (Bs/t)'],RAW.map(r=>[r.m,num(REC[r.m],1),num(r.p*1000)]))+`<p class="note">Humedad objetivo de extrusión: ${cfg.agua} %. Versión vigente: F-03.</p>`,`<button class="btn sm" data-a="recipe">Editar dosificación</button>`)+
+ card('Calculadora de materiales',`<div class="form"><label>Producto<select id="cp">${Object.entries(P).map(([k,p])=>`<option value="${k}">${esc(p.name)}</option>`).join('')}</select></label><label>Unidades a extruir<input id="cu" type="number" min="0" value="10000"></label></div><div id="calc" style="margin-top:12px"></div>`)},
+rutas(){return gen('rutas')},
+mps(){return card('Plan maestro: demanda frente a stock',table(['Producto','Pedidos pendientes','Stock de primera','En proceso o programado','Por programar'],Object.keys(P).map(k=>{const{d,w,f}=demanda(k);return[P[k].name,num(d),num(finished[k].a),num(w),f?tag(num(f),'bad'):tag('Cubierto','ok')]}))+'<p class="note">Por programar = pedidos − stock de primera − producción en proceso o programada.</p>')+gen('ventas')},
+mrp(){return card('Requerimiento de materiales (toneladas)',table(['Material','Stock','Requerido','Saldo proyectado','Stock mínimo','Acción'],mrp())+'<p class="note">Incluye órdenes aún no mezcladas (5 % de holgura) y la producción pendiente de programar (7 % de holgura).</p>')},
+capacidad(){const jobs=[['Extrusora',[[0,2,'008'],[2,2,'009'],[5,1,'Mant.']]],['Cámara 1',[[1,3,'008'],[4,2,'009']]],['Cámara 2',[[0,2,'007'],[3,3,'Libre',1]]],['Horno túnel 1',[[0,2,'006'],[2,2,'007'],[4,2,'008']]]];
+ const days=['26','27','28','29','30','01'];
+ return card('Programación de equipos: 26 nov al 1 dic (ejemplo fijo)',`<svg class="ch" viewBox="0 0 720 220" role="img" aria-label="Diagrama de programación">${days.map((d,i)=>`<text x="${130+i*98+49}" y="14" text-anchor="middle" font-size="12">${d}</text><line x1="${130+i*98}" x2="${130+i*98}" y1="20" y2="215" stroke="#d9dde5"/>`).join('')}${jobs.map((j,r)=>`<text x="0" y="${50+r*48}" font-size="13">${j[0]}</text>${j[1].map(([s,n,t,free])=>`<rect x="${132+s*98}" y="${30+r*48}" width="${n*98-4}" height="32" rx="3" fill="${free?'#d9dde5':t==='Mant.'?'#14213d':'#b4472b'}"/><text x="${132+s*98+(n*98-4)/2}" y="${51+r*48}" text-anchor="middle" font-size="12" fill="${free?'#1d2433':'#fff'}">${/^\d/.test(t)?'OP-'+t:t}</text>`).join('')}`).join('')}</svg>`)+card('Carga de capacidad de la semana',hbars([['Extrusora',78],['Secaderos',86],['Horno túnel',94],['Paletizado',61]],' %')+'<p class="note">El horno es el cuello de botella: programa la extrusión según su capacidad.</p>')},
+ordenes(){return card('Órdenes de producción',lotRows(lots),`<span><button class="btn alt sm" data-a="csv">Exportar CSV</button> <button class="btn sm" data-a="newOP">Nueva orden</button></span>`)},
+cantera(){return card('Acopios',table(['Material','Existencia (t)','Mínimo (t)','Estado'],RAW.map(r=>[r.m,num(r.kg/1000,1),num(r.min/1000),r.kg<r.min?tag('Bajo mínimo','bad'):tag('Normal','ok')])),`<button class="btn sm" data-a="ingreso">Registrar ingreso</button>`)+gen('cantera')},
+prep(){return stageView(1,card('Parámetros de preparación en línea (simulados)',kpis([['19,6 %','Humedad de mezcla'],['2,1 mm','Abertura de laminador'],['31 t/h','Alimentación'],['0,9 %','Retenido en malla 2 mm']])))},
+extr(){const by={};stops.forEach(s=>by[s[2]]=(by[s[2]]||0)+s[3]);const mins=sum(stops,s=>s[3]),disp=1-mins/(3*720),rend=.87,ex=bal()[0],q=1-ex.loss/ex.in;
+ return kpis([[num(disp*100,1)+' %','Disponibilidad (3 turnos)'],[num(rend*100)+' %','Rendimiento (supuesto)'],[num(q*100,1)+' %','Calidad en verde'],[num(disp*rend*q*100,1)+' %','OEE de la extrusora']])+stageView(2,`<div class="grid two">${card('Paradas por causa (minutos)',hbars(Object.entries(by).sort((a,b)=>b[1]-a[1])))}${card('Registro de paradas',table(['Fecha','Equipo','Causa','Min'],stops.slice(-7).reverse().map(s=>s.map(esc))),'<button class="btn sm" data-a="stop">Registrar parada</button>')}</div>`)},
+secado(){const h=['0h','6h','12h','18h','24h','30h','36h'];return stageView(3,`<div class="grid two">${card('Temperatura de cámara (°C)',lineChart([32,45,58,72,88,98,102],h,'#b4472b','°C'))}${card('Humedad de la pieza (%)',lineChart([20,17,13.5,9.5,5.5,3,1.8],h,'#14213d','%'))}</div>`+card('Estado de cámaras',table(['Cámara','Temperatura','Humedad relativa','Estado'],[['Cámara 1','64 °C','58 %',tag('En ciclo','warn')],['Cámara 2','88 °C','31 %',tag('En ciclo','warn')],['Cámara 3','29 °C','52 %',tag('Disponible','ok')]])))},
+coccion(){const z=[120,260,420,600,760,890,920,905,700,480,260,90];return stageView(4,card('Curva de quema del horno túnel (°C por zona)',lineChart(z,z.map((_,i)=>'Z'+(i+1)),'#b4472b','°C')+'<p class="note">Z1 a Z4 precalentamiento, Z5 a Z8 quema, Z9 a Z12 enfriamiento.</p>')+card('Vagonetas dentro del horno',`<div class="cars">${z.map((t,i)=>`<div class="car" style="background:hsl(${Math.max(0,45-t/22)},70%,${22+t/45}%)">V-${31+i}<br><b>${t} °C</b></div>`).join('')}</div>`))},
+clasif(){return stageView(5,card('Producto paletizado',table(['Producto','Pallets de primera','Pallets de segunda','Unidades sueltas'],Object.entries(P).map(([k,p])=>[p.name,Math.floor(finished[k].a/p.pallet),Math.floor(finished[k].b/p.pallet),num(finished[k].a%p.pallet+finished[k].b%p.pallet)]))))},
+mermas(){const e={},c={};lossLog.forEach(x=>{e[x.etapa]=(e[x.etapa]||0)+x.u;c[x.causa]=(c[x.causa]||0)+x.u});const sorted=o=>Object.entries(o).sort((a,b)=>b[1]-a[1]);
+ return `<div class="grid two">${card('Unidades perdidas por etapa',hbars(sorted(e)))}${card('Principales causas',hbars(sorted(c).slice(0,6)))}</div>`+card('Detalle por lote',table(['Lote','Etapa','Causa','Unidades','Destino'],lossLog.slice().reverse().map(x=>[x.lot,x.etapa,x.causa,num(x.u),['Extrusión','Secado'].includes(x.etapa)?tag('Retorna a mezcla','ok'):tag('Chamota o relleno')])))},
+calidad(){return gen('calidad')},
+traza(){const l=lots.find(x=>x.id===sel)||lots[0];const s=[['Orden emitida',`${num(l.plan)} unidades de ${P[l.prod].name}. Turno ${l.turno}.`,true],['Preparación',`Acopio ${l.acopio}, fórmula F-03, ${num((l.mix||0)/1000,1)} t de mezcla.`,l.stage>1],['Extrusión',`${num(l.ext||0)} producidas, ${num(l.extR||0)} rechazadas.`,l.stage>2],['Secado',`${l.dryer}: ${num(l.dryR||0)} perdidas.`,l.stage>3],['Cocción',`${l.kiln}: ${num(l.cookR||0)} perdidas, ${num(l.gas||0)} m³ de gas.`,l.stage>4],['Clasificación',`Primera ${num(l.a||0)}, segunda ${num(l.b||0)}, descarte ${num(l.disc||0)}.`,l.stage>5]];
+ const q=DB.calidad.r.find(r=>r[0]===l.id);
+ return card('Historia del lote',`<div class="form" style="margin-bottom:16px"><label>Lote<select id="selLot">${lots.map(x=>`<option ${x.id===l.id?'selected':''}>${x.id}</option>`).join('')}</select></label></div><div class="tl">${s.map(([t,d,ok])=>`<div><h3>${t} ${ok?tag('Registrado','ok'):tag('Pendiente')}</h3>${ok?esc(d):'Aún sin datos.'}</div>`).join('')}<div><h3>Calidad</h3>${q?`Resistencia ${esc(q[1])} MPa, absorción ${esc(q[2])} %. Dictamen: ${esc(q[4])}.`:'Sin ensayo registrado.'}</div></div>`)+card('Movimientos',table(['Fecha','Evento'],log.filter(x=>x.lot===l.id).map(x=>[x.t,esc(x.e)])))},
+mant(){return gen('mant')+gen('moldes')},
+energia(){const q=lots.filter(l=>l.gas);return kpis([[num(sum(q,l=>l.gas))+' m³','Gas natural'],[num(sum(q,l=>l.gas)*cfg.pGas)+' Bs','Costo de gas'],[num(sum(lots,l=>(l.ext||0)/1000*cfg.kwhMil))+' kWh','Electricidad estimada']])+card('Consumo específico por lote (m³ de gas por tonelada cargada)',hbars(q.map(l=>[l.id,l.gas/((l.ext-l.extR-l.dryR)*P[l.prod].kg/1000),1])))},
+inventario(){return card('Materia prima',table(['Material','Existencia (t)','Valor (Bs)'],RAW.map(r=>[r.m,num(r.kg/1000,1),num(r.kg*r.p)])))+card('Producto en proceso',table(['Lote','Producto','Etapa','Unidades'],lots.filter(l=>l.stage>2&&l.stage<6).map(l=>[l.id,P[l.prod].name,STAGES[l.stage],num(available(l))])))+card('Producto terminado',table(['Producto','Primera','Segunda','Valor de venta de primera (Bs)'],Object.entries(finished).map(([k,f])=>[P[k].name,num(f.a),num(f.b),num(f.a*P[k].price)])))},
+personal(){return gen('personal')},
+seguridad(){return gen('seguridad')},
+compras(){return card('Sugerencias de compra',table(['Material','Stock','Requerido','Saldo','Mínimo','Acción'],mrp()))+gen('compras')},
+ventas(){return gen('ventas')+gen('despachos')},
+costos(){const d=done(),rows=d.map(l=>{const c=cost(l),v=c.mil-c.std;return[l.id,P[l.prod].name,num(c.total),num(c.std,1),num(c.mil,1),tag((v>0?'+':'')+num(v,1),v>0?'bad':'ok')]});
+ const t={};d.forEach(l=>Object.entries(cost(l).c).forEach(([k,v])=>t[k]=(t[k]||0)+v));
+ return card('Costo real frente a estándar por millar vendible (Bs)',table(['Lote','Producto','Costo total','Estándar','Real','Variación'],rows),'<button class="btn sm" data-a="params">Editar tarifas</button>')+card('Composición del costo (Bs)',hbars(Object.entries(t)))+'<p class="note">Tarifas y estándares ilustrativos. El estándar considera 95 % de rendimiento.</p>'},
+finanzas(){return kpis([[num(sum(Object.entries(finished),([k,f])=>f.a*P[k].price))+' Bs','Stock de primera a precio de venta'],[num(sum(done(),l=>cost(l).total))+' Bs','Costo de lotes cerrados'],['No conectado','Integración con el SIN']])+gen('cuentas')},
+tableros(){const d=done();return `<div class="grid two">${card('Primera calidad por lote (%)',hbars(d.map(l=>[l.id,pct(l.a,l.a+l.b+l.disc),1]),' %'))}${card('Cumplimiento del plan (%)',hbars(d.map(l=>[l.id,pct(l.a+l.b,l.plan),1]),' %'))}${card('Costo real por millar (Bs)',hbars(d.map(l=>[l.id,cost(l).mil,1])))}${card('Merma por etapa (%)',hbars(bal().map(x=>[x.n,pct(x.loss,x.in),2]),' %'))}</div>`},
+admin(){return gen('usuarios')+card('Auditoría de movimientos',table(['Fecha','Lote','Evento'],log.slice(-10).reverse().map(x=>[x.t,x.lot,esc(x.e)])))},
+iot(){const r=n=>(n+(Math.random()-.5)*n*.03);return card('Lecturas de equipos (simuladas)',table(['Sensor','Equipo','Lectura','Estado'],[['Amperaje','EXT-01',num(r(285))+' A',tag('Normal','ok')],['Vacío','EXT-01',num(r(0.88),2)+' bar',tag('Normal','ok')],['Termocupla Z7','HT-01',num(r(920))+' °C',tag('Normal','ok')],['Vibración','LAM-01',num(r(7.8),1)+' mm/s',tag('Alta','bad')],['Contador de piezas','Cortadora',num(r(11200))+' u/h',tag('Normal','ok')]]),'<button class="btn sm" data-a="refresh">Actualizar lecturas</button>')},
+ia(){return `<div class="grid two">${card('Alertas y recomendaciones',aiAlerts())}${card('Asistente de planta',`<div class="chat" id="chat">${chat.map(m=>`<div class="msg ${m[0]}">${esc(m[1])}</div>`).join('')}</div><form id="ask" class="bar"><input id="q" aria-label="Pregunta" placeholder="Pregunta por mermas, gas, órdenes, stock o costos" style="flex:1;padding:8px"><button class="btn">Preguntar</button></form><p class="note">Respuestas simuladas con reglas sobre los datos de esta demostración.</p>`)}</div>`+card('Visión artificial en la línea (simulación)',table(['Cámara','Punto','Piezas revisadas','Defectos','Defecto frecuente'],[['CAM-1','Salida de cortadora','11.240','212','Borde astillado'],['CAM-2','Descarga de horno','8.930','96','Fisura']]))}
+};
+function aiAlerts(){const a=[],w=done().slice().sort((x,y)=>y.dryR/y.ext-x.dryR/x.ext)[0];
+ if(w)a.push([tag('Secado','bad'),`${w.id} tiene la mayor merma de secado: ${num(pct(w.dryR,w.ext-w.extR),1)} %. Revisar la rampa de temperatura de las primeras 12 horas.`]);
+ RAW.filter(r=>r.kg<r.min).forEach(r=>a.push([tag('Stock','warn'),`${r.m} está bajo el mínimo. Generar orden de compra.`]));
+ a.push([tag('Mantenimiento','warn'),'Vibración alta en LAM-01. Programar inspección de rodamientos.'],[tag('Moldes'),'El molde M-6H-02 usó 82 % de su vida útil. Preparar reemplazo.']);
+ return a.map(([t,m])=>`<p>${t} ${m}</p>`).join('')}
+const chat=[['','Hola. Puedo resumir mermas, gas, órdenes, stock y costos de la planta.']];
+function answer(q){q=q.toLowerCase();if(/merma|p[eé]rdida|rechazo/.test(q)){const m=bal().sort((a,b)=>b.loss/b.in-a.loss/a.in)[0];return `La mayor merma está en ${m.n}: ${num(pct(m.loss,m.in),2)} % (${num(m.loss)} unidades).`}
+ if(/gas|energ|horno/.test(q))return `Se registran ${num(sum(lots,l=>l.gas||0))} m³ de gas, equivalentes a Bs ${num(sum(lots,l=>l.gas||0)*cfg.pGas)}.`;
+ if(/orden|lote|producci/.test(q))return `Hay ${lots.filter(l=>l.stage<6).length} órdenes abiertas y ${done().length} terminadas.`;
+ if(/stock|arcilla|material/.test(q))return RAW.map(r=>`${r.m}: ${num(r.kg/1000)} t`).join('; ')+'.';
+ if(/costo|millar/.test(q)){const d=done();return `El costo promedio de los lotes cerrados es Bs ${num(sum(d,l=>cost(l).total)/sum(d,l=>l.a+l.b)*1000,1)} por millar vendible.`}
+ return 'En esta demostración respondo sobre mermas, gas, órdenes, stock y costos.'}
+
+/* ---------- navegación ---------- */
+const GROUPS=[['Base e ingeniería',[['maestros','Datos maestros'],['formulas','Fórmulas y fichas técnicas'],['rutas','Rutas y estándares']]],
+['Planificación',[['mps','Plan maestro de producción'],['mrp','Requerimiento de materiales'],['capacidad','Capacidad y programación'],['ordenes','Órdenes de producción']]],
+['Ejecución en planta',[['cantera','Cantera y materia prima'],['prep','Preparación y mezcla'],['extr','Extrusión y corte'],['secado','Secado'],['coccion','Cocción y hornos'],['clasif','Clasificación y paletizado'],['mermas','Reproceso y mermas']]],
+['Soporte a producción',[['calidad','Control de calidad'],['traza','Trazabilidad'],['mant','Mantenimiento'],['energia','Energía y combustibles'],['inventario','Inventarios y almacenes'],['personal','Personal de planta'],['seguridad','Seguridad y medio ambiente']]],
+['Gestión e integración',[['compras','Compras y proveedores'],['ventas','Ventas y despacho'],['costos','Costos de producción'],['finanzas','Finanzas y contabilidad'],['tableros','Indicadores y tableros'],['admin','Administración']]],
+['IA y automatización',[['iot','Sensores y equipos (IoT)'],['ia','Analítica con IA']]]];
+const INFO={dash:['Panel de producción','Estado de la planta, de la arcilla al pallet']};
+let n=0;let nav='<button data-m="dash"><i></i>Panel de producción</button>';
+GROUPS.forEach(([g,ms],gi)=>{nav+=`<div class="g">${g}</div>`;ms.forEach(([k,t])=>{n++;INFO[k]=[t,`Módulo ${n} de 29. ${g}`];nav+=`<button data-m="${k}" class="${gi===1||gi===2?'core':''}"><i>${n}</i>${t}</button>`})});
+$('#nav').innerHTML=nav;
+let cur='dash',sel='OP-2611-004';
+function calc(){const p=$('#cp').value,u=Math.max(0,Number($('#cu').value)||0),s=solid(p,u);$('#calc').innerHTML=table(['Material','Requerido (t)','Costo (Bs)'],RAW.map(r=>[r.m,num(s*REC[r.m]/100000,2),num(s*REC[r.m]/100*r.p)]))}
+function render(){V[cur]&&($('#view').innerHTML=V[cur]());$('#title').textContent=INFO[cur][0];$('#subtitle').textContent=INFO[cur][1];
+ document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.m===cur));
+ if(cur==='formulas'){calc();$('#cp').onchange=calc;$('#cu').oninput=calc}
+ if(cur==='traza')$('#selLot').onchange=e=>{sel=e.target.value;render()};
+ if(cur==='ia'){$('#chat').scrollTop=1e6;$('#ask').onsubmit=e=>{e.preventDefault();const q=$('#q').value.trim();if(!q)return;chat.push(['me',q],['',answer(q)]);render();$('#q').focus()}}}
+const go=k=>{cur=k;render();$('#side').classList.remove('open');scrollTo(0,0)};
+
+/* ---------- flujo de producción ---------- */
+function advance(id){const l=lots.find(x=>x.id===id);const note=(e)=>log.push({lot:id,t:today,e});
+ const loss=(etapa,u,causa)=>{if(u>0)lossLog.push({lot:id,etapa,causa,u})};
+ const whole=(...a)=>a.every(Number.isInteger)?'':'Las unidades deben ser números enteros.';
+ const cz=e=>({k:'causa',l:'Causa principal de la pérdida',o:causes[e]});
+ if(l.stage<2){const need=solid(l.prod,l.plan*1.03);
+  return form(`Preparar mezcla: ${id}`,[{k:'ac',l:'Acopio de origen',o:['AC-07','AC-08','AC-09']},{k:'t',l:'Mezcla húmeda preparada (t)',t:'number',v:(need*(1+cfg.agua/100)/1000).toFixed(1)}],v=>{if(v.t<=0)return 'La mezcla debe ser mayor que cero.';const s=v.t*1000/(1+cfg.agua/100);const f=RAW.find(r=>r.kg<s*REC[r.m]/100);if(f)return `No hay suficiente ${f.m} en acopio.`;RAW.forEach(r=>r.kg-=s*REC[r.m]/100);l.mix=v.t*1000;l.acopio=v.ac;l.stage=2;note(`Mezcla preparada: ${num(v.t,1)} t. Stock descontado.`);toast(`${id} pasa a extrusión`)},'Al guardar se descuenta la materia prima según la fórmula.')}
+ if(l.stage===2){const cap=Math.floor(l.mix/(1+cfg.agua/100)/solid(l.prod,1));return form(`Registrar extrusión: ${id}`,[{k:'e',l:'Unidades extruidas',t:'number',v:Math.min(cap,Math.round(l.plan*1.02))},{k:'r',l:'Rechazo en verde',t:'number',v:0},cz('Extrusión')],v=>{if(whole(v.e,v.r))return whole(v.e,v.r);if(v.e<=0||v.r>=v.e)return 'El rechazo debe ser menor que las unidades extruidas.';if(v.e>cap)return `La mezcla preparada alcanza para ${num(cap)} unidades como máximo.`;l.ext=v.e;l.extR=v.r;l.stage=3;loss('Extrusión',v.r,v.causa);note(`Extrusión: ${num(v.e)} producidas, ${num(v.r)} rechazadas.`);toast(`${id} pasa a secado`)},`La mezcla alcanza para ${num(cap)} unidades.`)}
+ if(l.stage===3||l.stage===4){const dry=l.stage===3,e=dry?'Secado':'Cocción',inp=available(l);
+  const fl=[{k:'r',l:'Unidades perdidas',t:'number',v:0},cz(e),dry?{k:'eq',l:'Cámara',o:['Cámara 1','Cámara 2','Cámara 3']}:{k:'gas',l:'Gas consumido (m³)',t:'number',v:Math.round(inp*P[l.prod].kg*cfg.gasM3kg)}];
+  return form(`Registrar ${e.toLowerCase()}: ${id}`,fl,v=>{if(whole(v.r))return whole(v.r);if(v.r>=inp)return `La pérdida debe ser menor que las ${num(inp)} unidades que ingresaron.`;if(dry){l.dryR=v.r;l.dryer=v.eq}else{if(v.gas<=0)return 'Registra el gas consumido.';l.cookR=v.r;l.gas=v.gas}l.stage++;loss(e,v.r,v.causa);note(`${e}: ${num(inp)} ingresaron, ${num(v.r)} perdidas.`);toast(`${id} pasa a ${dry?'cocción':'clasificación'}`)},`Ingresaron ${num(inp)} unidades.`)}
+ const inp=available(l),def=Math.round(inp*.05),dd=Math.round(inp*.008);
+ form(`Clasificar y paletizar: ${id}`,[{k:'a',l:'Primera calidad',t:'number',v:inp-def-dd},{k:'b',l:'Segunda calidad',t:'number',v:def},{k:'d',l:'Descarte',t:'number',v:dd},cz('Clasificación')],v=>{if(whole(v.a,v.b,v.d))return whole(v.a,v.b,v.d);const t=v.a+v.b+v.d;if(t!==inp)return `El balance no cuadra: suman ${num(t)} y salieron del horno ${num(inp)}.`;if(v.a+v.b<=0)return 'Debe haber unidades vendibles.';Object.assign(l,{a:v.a,b:v.b,disc:v.d,stage:6});finished[l.prod].a+=v.a;finished[l.prod].b+=v.b;loss('Clasificación',v.d,v.causa);note(`Clasificación: ${num(v.a)} de primera, ${num(v.b)} de segunda, ${num(v.d)} de descarte.`);toast(`${id} terminada e ingresada al almacén`)},`Salieron del horno ${num(inp)} unidades. La suma debe ser exacta.`)}
+
+const actions={
+ adv:advance,
+ trace(v){sel=v;go('traza')},
+ newOP(){form('Nueva orden de producción',[{k:'p',l:'Producto',o:Object.entries(P).map(([k,p])=>[k,p.name])},{k:'q',l:'Cantidad planificada',t:'number',v:30000},{k:'f',l:'Fecha',t:'date',v:today},{k:'t',l:'Turno',o:['Día','Noche']}],v=>{if(!Number.isInteger(v.q)||v.q<1)return 'La cantidad debe ser un entero mayor que cero.';const id='OP-2611-'+String(lots.length+1).padStart(3,'0');mk(id,v.p,v.q,0,v.f,v.t,{});log.push({lot:id,t:today,e:'Orden creada'});cur='ordenes';toast(`Orden ${id} creada`)})},
+ add(k){const d=DB[k];form(`Agregar registro: ${d.t}`,d.h.map((h,i)=>({k:'c'+i,l:h,o:k==='calidad'&&i===0?lots.filter(l=>l.stage===6).map(l=>l.id):(k==='ventas'&&i===2?Object.keys(P):(k==='ventas'&&i===5?['Pendiente','Entregado']:null)),t:k==='ventas'&&i===3?'number':(k==='ventas'&&i===4?'date':'text')})),v=>{d.r.unshift(d.h.map((_,i)=>String(v['c'+i])));toast('Registro guardado')})},
+ newProd(){form('Agregar producto',[{k:'c',l:'Código'},{k:'n',l:'Nombre'},{k:'d',l:'Medidas'},{k:'kg',l:'Peso cocido (kg)',t:'number'},{k:'pr',l:'Precio (Bs/u)',t:'number'},{k:'pl',l:'Unidades por pallet',t:'number'}],v=>{const c=v.c.trim().toUpperCase();if(!/^[A-Z0-9]{2,8}$/.test(c))return 'Usa un código de 2 a 8 letras o números.';if(P[c])return 'Ese código ya existe.';if(!(v.kg>0&&v.pl>=1))return 'El peso y las unidades por pallet deben ser mayores que cero.';const limpio=t=>t.replace(/[<>&"]/g,'');P[c]={name:limpio(v.n),dim:limpio(v.d),kg:v.kg,price:v.pr,pallet:Math.round(v.pl)};finished[c]={a:0,b:0};toast('Producto agregado')})},
+ recipe(){const k=Object.keys(REC);form('Editar dosificación',k.map((m,i)=>({k:'m'+i,l:m+' (%)',t:'number',v:REC[m]})),v=>{const t=sum(k,(m)=>v['m'+k.indexOf(m)]);if(Math.abs(t-100)>.001)return `Las proporciones suman ${num(t,1)} %. Deben sumar 100 %.`;k.forEach((m,i)=>REC[m]=v['m'+i]);toast('Dosificación actualizada')})},
+ ingreso(){form('Registrar ingreso de materia prima',[{k:'m',l:'Material',o:RAW.map(r=>r.m)},{k:'ac',l:'Acopio'},{k:'t',l:'Peso (t)',t:'number'},{k:'h',l:'Humedad %',t:'number'}],v=>{if(v.t<=0)return 'El peso debe ser mayor que cero.';RAW.find(r=>r.m===v.m).kg+=v.t*1000;DB.cantera.r.unshift([today,v.ac,v.m,String(v.t),String(v.h),'Recién ingresado']);toast('Ingreso registrado y stock actualizado')})},
+ stop(){form('Registrar parada',[{k:'e',l:'Equipo',o:['Extrusora','Cortadora','Laminador']},{k:'c',l:'Causa'},{k:'m',l:'Duración (minutos)',t:'number'}],v=>{if(v.m<=0||v.m>720)return 'La duración debe estar entre 1 y 720 minutos.';stops.push([today,v.e,v.c,v.m]);toast('Parada registrada')})},
+ params(){const l={pGas:'Gas (Bs/m³)',pKwh:'Electricidad (Bs/kWh)',moMil:'Mano de obra (Bs/millar)',mantMil:'Mantenimiento (Bs/millar)',indMil:'Indirectos (Bs/millar)'};form('Editar tarifas',Object.entries(l).map(([k,t])=>({k,l:t,t:'number',v:cfg[k]})),v=>{Object.keys(l).forEach(k=>cfg[k]=v[k]);toast('Costos recalculados')})},
+ csv(){const r=[['Orden','Producto','Plan','Etapa','Fecha','Turno'],...lots.map(l=>[l.id,P[l.prod].name,l.plan,STAGES[l.stage],l.date,l.turno])];const safe=x=>'"'+String(x).replace(/^([=+\-@])/,"'$1").replace(/"/g,'""')+'"';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+r.map(x=>x.map(safe).join(';')).join('\n')],{type:'text/csv'}));a.download='ordenes_produccion.csv';a.click()},
+ refresh(){render();toast('Lecturas actualizadas')}
+};
+document.addEventListener('click',e=>{const m=e.target.closest('[data-m]'),a=e.target.closest('[data-a]');if(m)go(m.dataset.m);else if(a)actions[a.dataset.a](a.dataset.v)});
+$('#menu').onclick=()=>$('#side').classList.toggle('open');
+render();
+</script>
+</body>
+</html>
